@@ -1,0 +1,7 @@
+*.tgz
+.jshintrc
+.travis.yml
+bower.json
+index.html
+index.json
+src

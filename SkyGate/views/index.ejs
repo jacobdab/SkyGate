@@ -1,0 +1,52 @@
+<% include ./partials/header%>
+
+<section id="Landing" class="h-100">
+<div class="container mt-5 h-100">
+<div class="row w-100">
+  <div class="col-lg-6">
+  <div class="form bg-white px-5 py-5 rounded">
+  <form action="/" method="post">
+    <div class="form-group">
+      <label for="countryInput">Państwo</label>
+      <input autocomplete="off"  type="text" class="form-control" id="countryInput" name="name" value="<%if(typeof country == 'string' && country){%><%=country.replace(/ /g,'')%><%}else{%><%}%>" placeholder="Podaj państwo">
+      <div id="searchResults" class="border"></div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submit" disabled>
+      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>Wyszukaj</button>
+  </form>
+</div>
+</div>
+  <%if(typeof resp == 'object' && resp){%>
+  <div class="col-lg-6">
+    <div class="row">
+      <%resp.forEach((citiesE,i)=>{%>
+      <div class="accordion w-100" id="cities">
+        <div class="card">
+          <div class="card-header bg-white" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#<%=(citiesE.city).replace(/ /g,'').replace('.','')%>">
+                <%=citiesE.city%>
+              </button>
+            </h2>
+          </div>
+          <div id="<%=(citiesE.city).replace(/ /g,'').replace('.','')%>" class="collapse" aria-labelledby="headingOne" data-parent="#cities">
+            <div class="card-body">
+              <%-content[i]%>
+            </div>
+          </div>
+        </div>
+      <% })%>
+    </div>
+  </div>
+  <% }else{%>
+  <%}%>
+  </div>
+</div>
+</div>
+</section>
+
+
+
+
+<% include ./partials/footer%>
